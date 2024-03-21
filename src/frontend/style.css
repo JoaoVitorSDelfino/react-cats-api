@@ -1,9 +1,13 @@
 body {
+    font-family: "Lucida Handwriting", "Brush Script MT", monospace;
+    background-color: bisque;
+
     height: auto;
 }
 
 img {
     max-width: 400px;
+    border-radius: 20px;
 }
 
 p {
@@ -16,6 +20,10 @@ h2 {
     margin: 5px;
 }
 
+#errorMessage {
+    margin-top: 30px;
+}
+
 button {
     color: #555;
 
@@ -23,7 +31,7 @@ button {
     padding: 10px;
 
     border-width: 1px;
-    border-radius: 40px;
+    border-radius: 15px;
 
     text-align: center;
     cursor: pointer;
@@ -35,6 +43,7 @@ input {
     margin: 0;
 
     border: none;
+    border-radius: 15px;
 }
 
 .container {
@@ -49,13 +58,15 @@ input {
 }
 
 #catInfo {
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 
     display: none;
-    width: 45%;
+    width: 50%;
     text-align: start;
     background-color:rgb(234, 208, 174);
 
     padding: 10px;
+    border-radius: 20px;
 }
