@@ -3,7 +3,12 @@
         <input type = "text" id = 'input' placeholder = "persian">
         <button id = 'catButton'> pesquisar gato </button>
         <div id = 'catInfo'>
-            <img src = '' id = "catImage" style = "width: 500px;">
+            <h2 id = 'catName'> </h2>
+            <p id = 'catPlayfulness'> </p>
+            <p id = 'catLength'> </p>
+            <p id = 'catWeight'> </p>
+            <p id = 'catLifeExpectancy'> </p>
+            <img src = '' id = "catImage">
         </div>
     </body>
     <script>
@@ -21,8 +26,18 @@
         }
 
         function showData(catData) {
+            var name = document.getElementById('catName')
+            var playfulness = document.getElementById('catPlayfulness')
+            var length = document.getElementById('catLength')
+            var weight = document.getElementById('catWeight')
+            var lifeExpectancy = document.getElementById('catLifeExpectancy')
             var image = document.getElementById('catImage')
 
+            name.innerHTML = 'Name: ' + catData.name
+            playfulness.innerHTML = 'Playfulness (scale 1 to 5): ' + catData.playfulness
+            length.innerHTML = 'Length: ' + catData.length
+            weight.innerHTML = 'Weight: ' + catData.min_weight + ' - ' + catData.max_weight + ' pounds' 
+            lifeExpectancy.innerHTML = 'Life expectancy: ' + catData.min_life_expectancy + ' - ' + catData.max_life_expectancy + ' years'
             image.src = catData.image_link
         }
 
