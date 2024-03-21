@@ -36,7 +36,7 @@ function updateData(catData) {
 // 2 -> Pesquisa não foi bem sucedida, mostra uma mensagem informando o erro 
 function errorDisplay(value) {
     const data = document.getElementById('catInfo')
-    var error = document.getElementById("errorMessage")
+    var error = document.getElementById('errorMessage')
 
     if (value === 0) {
         data.style.display = 'block'
@@ -58,6 +58,7 @@ const input = document.getElementById('input')
 const info = document.getElementById('catInfo')
 var error = document.getElementById("errorMessage")
 
+// Event listener ao clicar o botão de pesquisar
 search.addEventListener('click', function() {
     let catName = input.value
 

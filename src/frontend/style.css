@@ -70,3 +70,10 @@ input {
     padding: 10px;
     border-radius: 20px;
 }
+
+#yarnball {
+    width: 45px;
+    height: 45px;
+
+    vertical-align: middle;
+}
