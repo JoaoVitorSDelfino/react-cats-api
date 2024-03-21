@@ -1,7 +1,10 @@
 <html lang = 'en'>
     <body>
-        <input type = "text" id = 'input'>
+        <input type = "text" id = 'input' placeholder = "persian">
         <button id = 'catButton'> pesquisar gato </button>
+        <div id = 'catInfo'>
+            <img src = '' id = "catImage" style = "width: 500px;">
+        </div>
     </body>
     <script>
         async function getData(catName) {
@@ -17,6 +20,12 @@
             return await response.json()
         }
 
+        function showData(catData) {
+            var image = document.getElementById('catImage')
+
+            image.src = catData.image_link
+        }
+
         const catButton = document.getElementById("catButton")
         const input = document.getElementById("input")
 
@@ -25,8 +34,8 @@
 
             getData(catName).then((data) => {
                 const catData = data[0]
-                console.log(catData)
+                showData(catData)
             })
-        });
+        })
     </script>
 </html>
