@@ -13,13 +13,13 @@ async function getData(catName) {
 }
 
 // Atualiza os dados do HTML para refletir o resultado da pesquisa da API
-function showData(catData) {
-    var name = document.getElementById('catName')
-    var playfulness = document.getElementById('catPlayfulness')
-    var length = document.getElementById('catLength')
-    var weight = document.getElementById('catWeight')
-    var lifeExpectancy = document.getElementById('catLifeExpectancy')
-    var image = document.getElementById('catImage')
+function updateData(catData) {
+    let name = document.getElementById('catName')
+    let playfulness = document.getElementById('catPlayfulness')
+    let length = document.getElementById('catLength')
+    let weight = document.getElementById('catWeight')
+    let lifeExpectancy = document.getElementById('catLifeExpectancy')
+    let image = document.getElementById('catImage')
 
     name.innerHTML = 'Name: ' + catData.name
     playfulness.innerHTML = 'Playfulness (scale 1 to 5): ' + catData.playfulness
@@ -29,21 +29,51 @@ function showData(catData) {
     image.src = catData.image_link
 }
 
-const search = document.getElementById("searchButton")
-const input = document.getElementById("input")
+// Tratamento de erros
+// Recebe 3 valores: 0, 1 e 2
+// 0 -> Pesquisa bem sucedida, mostra o resultado e esconde quaisquer mensagens de erro previamente emitidas.
+// 1 -> Input box vazia, mostra uma mensagem informando o erro.
+// 2 -> Pesquisa não foi bem sucedida, mostra uma mensagem informando o erro 
+function errorDisplay(value) {
+    const data = document.getElementById('catInfo')
+    var error = document.getElementById("errorMessage")
 
-search.addEventListener("click", function() {
+    if (value === 0) {
+        data.style.display = 'block'
+        error.style.display = 'none'
+    } else {
+        data.style.display = 'none'
+        error.style.display = 'block'
+
+        if (value === 1) {
+            error.innerHTML = 'ERROR, input must not be empty!'
+        } else if (value === 2) {
+            error.innerHTML = 'ERROR, cat not found!'
+        }
+    }
+}
+
+const search = document.getElementById('searchButton')
+const input = document.getElementById('input')
+const info = document.getElementById('catInfo')
+var error = document.getElementById("errorMessage")
+
+search.addEventListener('click', function() {
     let catName = input.value
 
+    // Verifica se um valor foi informado para a pesquisa
     if (catName != '') {
         getData(catName).then((data) => {
             const catData = data[0]
-            showData(catData)
+            // Verifica se a pesquisa foi bem sucedida
+            if (catData != undefined) {
+                updateData(catData)
+                errorDisplay(0)
+            } else {
+                errorDisplay(2)
+            }
         })
     } else {
-        let error = document.getElementById("errorMessage")
-
-        error.innerHTML = 'ERROR, input must not be empty!'
-        error.style.display = "block"
+        errorDisplay(1)
     }
 })
