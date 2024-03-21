@@ -1,12 +1,12 @@
 <html lang = 'en'>
     <body>
-        
+        <input type = "text" id = 'input'>
+        <button id = 'catButton'> pesquisar gato </button>
     </body>
     <script>
-        var catName = 'persian'
-        var url = 'https://api.api-ninjas.com/v1/cats?name=' + catName
+        async function getData(catName) {
+            var url = 'https://api.api-ninjas.com/v1/cats?name=' + catName
 
-        async function getData() {
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -17,9 +17,16 @@
             return await response.json()
         }
 
-        getData().then((data) => {
-            const catData = data[0]
-            console.log(catData)
-        })
+        const catButton = document.getElementById("catButton")
+        const input = document.getElementById("input")
+
+        catButton.addEventListener("click", function() {
+            let catName = input.value
+
+            getData(catName).then((data) => {
+                const catData = data[0]
+                console.log(catData)
+            })
+        });
     </script>
 </html>
