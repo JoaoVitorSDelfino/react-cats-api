@@ -35,8 +35,15 @@ const input = document.getElementById("input")
 search.addEventListener("click", function() {
     let catName = input.value
 
-    getData(catName).then((data) => {
-        const catData = data[0]
-        showData(catData)
-    })
+    if (catName != '') {
+        getData(catName).then((data) => {
+            const catData = data[0]
+            showData(catData)
+        })
+    } else {
+        let error = document.getElementById("errorMessage")
+
+        error.innerHTML = 'ERROR, input must not be empty!'
+        error.style.display = "block"
+    }
 })
