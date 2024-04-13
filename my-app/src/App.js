@@ -1,32 +1,35 @@
 import yarnBall from './images/yarnball.png'
 
-import SearchButton from './components/SearchButton'
 import InputComponent from './components/InputComponent'
-
-import React, { useState } from 'react'
-
 import useFetchData from './components/useFetchData'
+import Results from './components/Results'
+
+import React, { useState, useEffect } from 'react'
 
 function App() {
-  const [searchResults, setSearchResults] = useState(null)
-  const fetchData = useFetchData()
+  const [searchResults, setSearchResults] = useState([]);
+  const fetchData = useFetchData();
+
+  useEffect(() => {
+    console.log("Updated search results:", searchResults);
+  }, [searchResults]);
 
   const handleSearch = async (searchTerm) => {
     try {
-      const data = await fetchData(searchTerm)
-      setSearchResults(data)
-      console.log(data)
+      const data = await fetchData(searchTerm);
+      setSearchResults(data);
     } catch (error) {
       // Handle error
-      console.error('Error searching:', error)
+      console.error('Error searching:', error);
     }
   }
+  
   return (
     <div className="App">
       <div class = 'container'>
           <h1> Cats <img src = {yarnBall} id = 'yarnball' alt='yarnball' /> </h1>
           <InputComponent onSearch={handleSearch} />
-          <div id = 'infoContainer'></div>
+          <Results data={searchResults} />
 
           <p id = 'errorMessage' style = {{ display: 'none' }}> </p>
         </div>
