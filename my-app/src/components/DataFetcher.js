@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
-const DataFetcher = () => {
+const DataFetcher = memo(() => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -32,6 +32,6 @@ const DataFetcher = () => {
       )}
     </div>
   );
-};
+});
 
 export default DataFetcher;
