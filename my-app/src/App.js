@@ -1,19 +1,19 @@
+import yarnBall from './images/yarnball.png'
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class = 'container'>
+            <h1> Cats <img src = {yarnBall} id = 'yarnball' alt='yarnball' /> </h1>
+            <input type = "text" id = 'input' placeholder = "Search for a cat here!" />
+            <button id = 'searchButton'> Search </button>
+            <div id = 'infoContainer'>
+                
+            </div>
+
+            <p id = 'errorMessage' style = {{ display: 'none' }}> </p>
+        </div>
+        <script src = '../src/main.js'> </script>
     </div>
   );
 }
