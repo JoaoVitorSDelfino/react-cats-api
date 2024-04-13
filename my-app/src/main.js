@@ -77,18 +77,17 @@ function errorDisplay(value) {
 
 const search = document.getElementById('searchButton')
 const input = document.getElementById('input')
-const info = document.getElementById('catInfo')
-var error = document.getElementById("errorMessage")
 
 // Event listener ao clicar o botão de pesquisar
 search.addEventListener('click', function() {
+    console.log('teste')
     let catName = input.value
     // Apaga a pesquisa anterior
     const container = document.getElementById("infoContainer")
     container.innerHTML = ''
 
     // Verifica se um valor foi informado para a pesquisa
-    if (catName != '') {
+    if (catName !== '') {
         getData(catName).then((data) => {
             const catData = data
             console.log(catData)
