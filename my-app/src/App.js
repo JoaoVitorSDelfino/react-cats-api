@@ -1,16 +1,31 @@
 import yarnBall from './images/yarnball.png'
 
 import SearchButton from './components/SearchButton'
-import DataFetcher from './components/DataFetcher'
+import InputComponent from './components/InputComponent'
+
+import React, { useState } from 'react'
+
+import useFetchData from './components/useFetchData'
 
 function App() {
+  const [searchResults, setSearchResults] = useState(null)
+  const fetchData = useFetchData()
+
+  const handleSearch = async (searchTerm) => {
+    try {
+      const data = await fetchData(searchTerm)
+      setSearchResults(data)
+      console.log(data)
+    } catch (error) {
+      // Handle error
+      console.error('Error searching:', error)
+    }
+  }
   return (
     <div className="App">
       <div class = 'container'>
           <h1> Cats <img src = {yarnBall} id = 'yarnball' alt='yarnball' /> </h1>
-          <input type = "text" id = 'input' placeholder = "Search for a cat here!" />
-          <SearchButton text="Search" />
-          <DataFetcher />
+          <InputComponent onSearch={handleSearch} />
           <div id = 'infoContainer'></div>
 
           <p id = 'errorMessage' style = {{ display: 'none' }}> </p>

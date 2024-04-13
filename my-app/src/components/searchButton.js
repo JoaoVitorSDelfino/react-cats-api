@@ -1,13 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const SearchButton = ({ text }) => {
-  const handleClick = () => {
-    console.log('teste')
-  }
-
+const SearchButton = ({ onClick }) => {
   return (
-    <button onClick={handleClick}>{text}</button>
-  )
-}
+    <button onClick={onClick}>Search</button>
+  );
+};
 
-export default SearchButton
+export default SearchButton;
