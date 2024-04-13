@@ -1,16 +1,13 @@
-import React from "react"
+import React from 'react'
 
-function searchButton() {
-    function update() {
-        alert('Button clicked!')
-    }
+const SearchButton = ({ text }) => {
+  const handleClick = () => {
+    console.log('teste')
+  }
 
-    return (
-        <div>
-            {/* Button with onClick event handler */}
-            <button onClick={update}>Click me</button>
-        </div>
-    )
+  return (
+    <button onClick={handleClick}>{text}</button>
+  )
 }
 
-export default searchButton
+export default SearchButton
