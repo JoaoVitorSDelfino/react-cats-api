@@ -1,7 +1,7 @@
 import yarnBall from './images/yarnball.png'
 
 import InputComponent from './components/InputComponent'
-import useFetchData from './components/useFetchData'
+import useFetchData from './api/useFetchData'
 import Results from './components/Results'
 
 import React, { useState, useEffect } from 'react'
