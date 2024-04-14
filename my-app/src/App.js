@@ -1,26 +1,30 @@
 import yarnBall from './images/yarnball.png'
 
-import InputComponent from './components/InputComponent'
 import useFetchData from './api/useFetchData'
 import Results from './components/Results'
+import InputComponent from './components/InputComponent'
 
 import React, { useState, useEffect } from 'react'
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
-  const fetchData = useFetchData();
+  const [searchResults, setSearchResults] = useState([])
+  const fetchData = useFetchData()
 
   useEffect(() => {
-    console.log("Updated search results:", searchResults);
-  }, [searchResults]);
+    console.log("Updated search results:", searchResults)
+  }, [searchResults])
 
   const handleSearch = async (searchTerm) => {
-    try {
-      const data = await fetchData(searchTerm);
-      setSearchResults(data);
-    } catch (error) {
-      // Handle error
-      console.error('Error searching:', error);
+    if (searchTerm === '') {
+      console.log('Error, empty input')
+    }
+
+    const data = await fetchData(searchTerm)
+
+    if (data.length > 0) {
+      setSearchResults(data)
+    } else if (data.length === 0) {
+      console.log('Error, no data found')
     }
   }
   
