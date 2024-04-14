@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const InputComponent = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchComponent = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
+    setSearchTerm(event.target.value)
   };
 
   const handleSearch = () => {
-    onSearch(searchTerm);
+    onSearch(searchTerm)
   };
 
   return (
@@ -19,4 +19,4 @@ const InputComponent = ({ onSearch }) => {
   );
 };
 
-export default InputComponent;
+export default SearchComponent
