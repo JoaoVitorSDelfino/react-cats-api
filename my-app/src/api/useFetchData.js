@@ -25,7 +25,7 @@ const UseFetchData = (props) => {
   console.log(data)
 
   useEffect(() => {
-    fetchData('');
+    fetchData('e');
   }, []);
 
   return (
