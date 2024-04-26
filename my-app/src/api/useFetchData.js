@@ -1,8 +1,11 @@
-import { useMemo } from 'react';
+import { createContext, useState, useEffect, useMemo } from 'react';
 
-const useFetchData = () => {
+export const ContextFetchData = createContext()
+
+const UseFetchData = (props) => {
+  const [data, setData] = useState([])
+
   const fetchData = async (searchTerm) => {
-    try {
         const url = 'https://api.api-ninjas.com/v1/cats?name=' + searchTerm
 
         const response = await fetch(url, {
@@ -11,15 +14,22 @@ const useFetchData = () => {
                 'X-Api-Key': 'dfUTR8K+sJut7qcjZwadOw==mzaFqsho8Bchu73p'
             },
         })
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
-    }
-  };
+        setData(await response.json())
+  }
 
-  return useMemo(() => fetchData, []);
+  const value = useMemo(() => ({
+    data
+  }), [data])
+
+  useEffect(() =>{
+    fetchData()
+  }, [])
+
+  return (
+    <ContextFetchData.Provider value={value}>
+      {props.children}
+    </ContextFetchData.Provider>
+  )
 };
 
-export default useFetchData;
+export default UseFetchData;
