@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { ContextFetchData } from '../api/UseFetchData';
 
-const SearchComponent = ({ onSearch }) => {
+const SearchComponent = () => {
+  const { fetchData } = useContext(ContextFetchData);
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleInputChange = (event) => {
@@ -8,7 +10,8 @@ const SearchComponent = ({ onSearch }) => {
   };
 
   const handleSearch = () => {
-    onSearch(searchTerm)
+    console.log(searchTerm)
+    fetchData(searchTerm)
   };
 
   return (
