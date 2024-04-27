@@ -1,0 +1,83 @@
+body {
+    font-family: "Lucida Handwriting", "Brush Script MT", monospace;
+    background-color: bisque;
+
+    height: auto;
+}
+
+img {
+    max-width: 400px;
+    border-radius: 20px;
+}
+
+p {
+    font-size: 15px;
+    margin: 5px;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 5px;
+}
+
+#errorMessage {
+    margin-top: 30px;
+}
+
+button {
+    color: #555;
+
+    width: 130px;
+    padding: 10px;
+
+    border-width: 1px;
+    border-radius: 15px;
+
+    text-align: center;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d8d8d8;
+    transition: 0.5s;
+}
+
+input {
+    width: 200px;
+    padding: 10px;
+    margin: 0;
+
+    border: none;
+    border-radius: 15px;
+}
+
+.container {
+    gap: 50px;
+
+    width: 100%;
+    max-width: 800px;
+
+    margin: 30px auto 0px;
+    padding: 0px 30px 40px;
+    text-align: center;
+}
+
+.catInfo {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 50%;
+    text-align: start;
+    background-color:rgb(234, 208, 174);
+
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#yarnball {
+    width: 45px;
+    height: 45px;
+
+    vertical-align: middle;
+}
