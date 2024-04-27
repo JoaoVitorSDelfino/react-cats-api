@@ -15,10 +15,10 @@ const Results = ({ data, error }) => {
           </div>
         ))}
       </div>
-    );
+    )
   } else {
     return ''
   }
-};
+}
 
 export default Results

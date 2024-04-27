@@ -21,11 +21,11 @@ function AlertComponent({searchStatus}) {
         case 1:
             variant = 'warning'
             message = 'Search must not be empty.'
-            break;
+            break
         case 2:
             variant = 'danger'
             message = 'No results found.'
-            break;
+            break
         default:
             variant = 'success'
             message = ''
@@ -47,7 +47,7 @@ function AlertComponent({searchStatus}) {
                 </div>
             </Alert>
         </>
-  );
+  )
 }
 
 export default AlertComponent
