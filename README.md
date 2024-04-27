@@ -27,7 +27,7 @@ Basta acessar o seguinte link: https://joaovitorsdelfino.github.io/react-cats-ap
 
 # Funcionamento
   Basta digitar o nome de um gato e clicar em 'Search', logo em seguida o resultado é mostrado.
-    ![image](https://github.com/JoaoVitorSDelfino/react-cats-api/assets/103132209/13011d4f-d76d-4726-867e-0e8fd30646f8)
+    <img src="https://github.com/JoaoVitorSDelfino/react-cats-api/assets/103132209/13011d4f-d76d-4726-867e-0e8fd30646f8" width="50%">
 
 # Tecnologias
 - Javascript, HTML e CSS;
