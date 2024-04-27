@@ -10,13 +10,34 @@ const SearchComponent = () => {
 
   const [error, setError] = useState(0)
 
+  // Tratamento de pesquisa
+  // 0 - Pesquisa bem sucedida
+  // 1 - Pesquisa vazia
+  // 2 - Sem resultados
+  const result = () => {
+    const search = searchTerm
+
+    if (search === '') {
+      setError(1)
+    }
+
+    // Verifica se a pesquisa foi bem sucedida
+    if (data.length > 0) {
+      setError(0)
+    } else if (data.length === 0) {
+      setError(2)
+    }
+
+    console.log(error)
+  }
+
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value)
   };
 
   const handleSearch = () => {
-    console.log(searchTerm)
     fetchData(searchTerm)
+    result()
   };
 
   return (
