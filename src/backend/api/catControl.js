@@ -21,7 +21,7 @@ module.exports = {
     },
 
     buscarPorNome: async (nome) => {
-        const gato = await Palestra.findOne({where: {name: nome}})
+        const gato = await Cat.findOne({where: {name: nome}})
 
         if (gato) {
             return {status: true, mensagem: 'Sucesso ao buscar gato!', gato: gato}
