@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { ContextFetchData } from '../api/UseFetchData'
+import { ContextFetchData } from '../../api/UseFetchData'
 
 import AlertComponent from '../components/bootstrap/AlertComponent'
 import Results from '../components/Results'

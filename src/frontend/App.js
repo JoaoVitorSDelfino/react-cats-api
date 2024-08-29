@@ -2,7 +2,7 @@ import yarnBall from './images/yarnball.png'
 
 import SearchComponent from './components/SearchComponent'
 
-import ContextFetchData from './api/UseFetchData'
+import ContextFetchData from '../api/UseFetchData'
 
 function App() {
   return (
