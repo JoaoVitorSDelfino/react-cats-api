@@ -17,15 +17,7 @@ const Cat = db.define('cat', {
         type: Sequelize.BLOB,
         allowNull: false,
     },
-    weight: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    height: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    playfullness: {
+    description: {
         type: Sequelize.STRING,
         allowNull: false,
     },
