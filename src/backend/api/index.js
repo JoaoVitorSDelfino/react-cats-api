@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/', require('./routes/catRoute'))
 app.use('/', require('./routes/install'))
+app.use('/', require('./routes/login'))
 
 app.listen(port, function() {
     console.log('Server is running at port ' + port)

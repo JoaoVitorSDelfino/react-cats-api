@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react"
+import { signLogin } from "../services/authentication"
 
 function Login() {
-  const [login, setLogin] = useState("");
-  const [senha, setSenha] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [login, setLogin] = useState("")
+  const [senha, setSenha] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      if (response.data.user.senha === senha) {
-        setRole(response.data.user.funcao);
+      const successLogin = await signLogin(login, senha)
+
+      if (successLogin.status) {
+        console.log("es")
+
         setErrorMessage("");
-        navigate("/home"); // Redireciona para o menu inicial
       } else {
-        setErrorMessage("Login ou senha incorretos.");
+        setErrorMessage("Login ou senha incorretos.")
       }
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
   };
 
