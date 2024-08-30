@@ -1,12 +1,22 @@
 const express = require("express")
 const router = express.Router()
 const User = require('../../models/user') 
+const winston = require('winston')
 
 const jwt = require('jsonwebtoken')
 
+const loginLog = winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    transports: [
+      new winston.transports.File({ filename: "../logs/loginError.log", level: "error" }),
+      new winston.transports.File({ filename: "../logs/activity.log" }),
+    ],
+})
+
 router.post("/login", async (req, res) => {
     const { username, password } = req.body
-    console.log(username, password)
+    loginLog.info('Login try: ' + username)
   
     try {
         const findUser = await User.findOne({ username })
@@ -14,8 +24,12 @@ router.post("/login", async (req, res) => {
         if (findUser) {
             if (password == findUser.password) {
                 const token = jwt.sign({ username: findUser.username }, 'secret', {expiresIn: "1h"})
+                loginLog.info('Successful login try: ' + username)
+
                 res.status(200).json({ status: true, message: "Login aprovado", token: token });
             } else {
+                loginLog.info('Unesuccessful login try: ' + username)
+
                 res.status(401).json({ status: false, message: "ERRO, senha errada!" });
             }
         } else {

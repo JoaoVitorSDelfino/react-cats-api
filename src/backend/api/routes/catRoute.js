@@ -1,11 +1,24 @@
 const express = require("express")
 const router = express.Router()
+const winston = require('winston')
 
 const Gato = require('../catControl')
 const authenticate = require('../../middlewares/authToken.js')
- 
+
+const apiLog = winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    transports: [
+      new winston.transports.File({ filename: "../logs/apiError.log", level: "error" }),
+      new winston.transports.File({ filename: "../logs/api.log" }),
+    ],
+})
+
 router.get('/getCat/:nome', authenticate, async (req, res) => {
     try {
+        const logMessage = `${req.method} ${req.originalUrl}`
+        apiLog.info(logMessage)
+
         const gato = await Gato.buscarPorNome(req.params.nome)
 
         // Valida se o gato foi encontrado
@@ -22,6 +35,9 @@ router.get('/getCat/:nome', authenticate, async (req, res) => {
 
 router.post("/addCat", authenticate, async (req, res) => {
     try {
+        const logMessage = `${req.method} ${req.originalUrl}`
+        apiLog.info(logMessage)
+
         const novoGato = await Gato.criar(req.body)
 
         if (novoGato.status) {

@@ -22,7 +22,8 @@
     "react-scripts": "5.0.1",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "winston": "^3.14.2"
   },
   "scripts": {
     "start": "react-scripts start",
