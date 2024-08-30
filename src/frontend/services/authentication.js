@@ -16,3 +16,8 @@ export const signLogin = async (username, password) => {
         }
     }
 }
+
+export const getToken = () => {
+  const token = localStorage.getItem('token')
+  return token || null
+}

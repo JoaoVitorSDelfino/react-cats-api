@@ -1,5 +1,8 @@
+import axios from "axios"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+
+import {getToken} from "../services/authentication"
 
 function CreateCat() {
   const [name, setName] = useState("")
@@ -18,9 +21,16 @@ function CreateCat() {
     };
 
     try {
-      navigate("/mainMenu")
+        const token = getToken()
+
+        const response = await axios.post('http://localhost:3001/addCat', novoGato, {headers: {'Authorization': `Bearer ${token}`}})
+
+        if (response.status) {
+            console.log("sucesso ao adicionar gato")
+            navigate("/mainMenu")
+        }
     } catch (error) {
-      console.error("Erro ao adicionar gato:", error)
+        console.error("Erro ao adicionar gato:", error)
     }
 
     // Limpar os campos após o submit
@@ -60,11 +70,12 @@ function CreateCat() {
             />
           </div>
           <div style={{ marginBottom: "15px" }}>
-            <label htmlFor="image">Imagem:</label>
+            <label htmlFor="image">URL da Imagem:</label>
             <input
-              type="file"
+              type="text"
               id="image"
-              onChange={(e) => setImage(e.target.files[0])}
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
               required
               style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
             />

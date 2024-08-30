@@ -14,7 +14,7 @@ const Cat = db.define('cat', {
         allowNull: false,
     },
     image: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     description: {
