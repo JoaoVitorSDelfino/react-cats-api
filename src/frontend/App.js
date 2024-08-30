@@ -1,25 +1,20 @@
-import yarnBall from './images/yarnball.png'
+import React from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-import SearchComponent from './components/SearchComponent'
-import Login from './components/Login'
-
-import ContextFetchData from '../api/UseFetchData'
+import Login from "./components/Login"
+import MainMenu from "./components/MainMenu"
+import CreateCat from "./components/CreateCat"
 
 function App() {
   return (
-    /*<ContextFetchData>
-      <div className="App">
-        <div className = 'container'>
-            <h1> Cats <img src = {yarnBall} id = 'yarnball' alt='yarnball' /> </h1>
-            <SearchComponent/>
-          </div>
-          <script src = '../src/main.js'> </script>
-      </div>
-    </ContextFetchData>*/
-    <Login>
-      
-    </Login>
-  )
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/mainMenu" element={<MainMenu />} />
+          <Route path="/createCat" element={<CreateCat />} />
+        </Routes>
+      </Router>
+  );
 }
 
-export default App
+export default App;

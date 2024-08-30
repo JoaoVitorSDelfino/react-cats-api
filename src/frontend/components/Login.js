@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 import { signLogin } from "../services/authentication"
 
 function Login() {
@@ -6,21 +8,18 @@ function Login() {
   const [senha, setSenha] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
 
+  const navigate = useNavigate()
+
   const handleLogin = async (e) => {
     e.preventDefault()
 
     try {
-      const successLogin = await signLogin(login, senha)
+      await signLogin(login, senha)
 
-      if (successLogin.status) {
-        console.log("es")
-
-        setErrorMessage("");
-      } else {
-        setErrorMessage("Login ou senha incorretos.")
-      }
+      navigate("/mainMenu")
+      setErrorMessage("")
     } catch (e) {
-      console.log(e)
+      setErrorMessage("Login ou senha incorretos.")
     }
   };
 
