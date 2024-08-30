@@ -7,7 +7,7 @@ function MainMenu() {
         if (route === 0) {
             navigate("/createCat")
         } else if (route === 1) {
-            navigate("/findCat")
+            navigate("/searchCat")
         }
     }
 

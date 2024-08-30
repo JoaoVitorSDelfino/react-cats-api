@@ -4,15 +4,15 @@ const router = express.Router()
 const Gato = require('../catControl')
 const authenticate = require('../../middlewares/authToken.js')
  
-router.get('/getCat/:id', authenticate, async (req, res) => {
+router.get('/getCat/:nome', authenticate, async (req, res) => {
     try {
         const gato = await Gato.buscarPorNome(req.params.nome)
 
         // Valida se o gato foi encontrado
         if (gato.status) {
-            res.status(201).json({gato: oficina})
+            res.status(201).json({gato: gato})
         } else {
-            res.status(400).json({gato: oficina})
+            res.status(400).json({gato: gato})
         }
     } catch (error) {
         console.error(error)
@@ -20,7 +20,7 @@ router.get('/getCat/:id', authenticate, async (req, res) => {
     }
 })
 
-router.post("/addCat", async (req, res) => {
+router.post("/addCat", authenticate, async (req, res) => {
     try {
         const novoGato = await Gato.criar(req.body)
 
