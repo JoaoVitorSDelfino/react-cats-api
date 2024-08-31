@@ -19,7 +19,7 @@ function SearchCat() {
         try {
             const token = getToken()
 
-            const response = await axios.get(`http://localhost:3001/getCat/${nome}`, {
+            const response = await axios.get(`https://localhost:3001/getCat/${nome}`, {
                 headers: { 'Authorization': `${token}` }
             })
 

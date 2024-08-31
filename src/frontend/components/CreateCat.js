@@ -23,7 +23,7 @@ function CreateCat() {
     try {
         const token = getToken()
 
-        const response = await axios.post('http://localhost:3001/addCat', novoGato, {headers: {'Authorization': `${token}`}})
+        const response = await axios.post('https://localhost:3001/addCat', novoGato, {headers: {'Authorization': `${token}`}})
 
         if (response.status) {
             console.log("sucesso ao adicionar gato")

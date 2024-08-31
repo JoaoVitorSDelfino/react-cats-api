@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const signLogin = async (username, password) => {
     try {
-        const response = await axios.post('http://localhost:3001/login', {username, password})
+        const response = await axios.post('https://localhost:3001/login', {username, password})
         const token = response.data.token
 
         localStorage.setItem('token', token)

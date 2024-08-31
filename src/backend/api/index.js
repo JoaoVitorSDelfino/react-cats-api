@@ -2,6 +2,13 @@ const express = require('express')
 const cors = require("cors")
 const app = express()
 
+const fs = require('fs')
+const https = require('https')
+
+const chavePrivada = fs.readFileSync("../certificate/key.pem", "utf8")
+const certificado = fs.readFileSync("../certificate/cert.pem", "utf8")
+const credenciais = { key: chavePrivada, cert: certificado }
+
 const port = 3001
 
 // Config do banco de dados
@@ -24,6 +31,8 @@ app.use('/', require('./routes/catRoute'))
 app.use('/', require('./routes/install'))
 app.use('/', require('./routes/login'))
 
-app.listen(port, function() {
+const httpsServer = https.createServer(credenciais, app)
+
+httpsServer.listen(port, function() {
     console.log('Server is running at port ' + port)
 })
