@@ -1,7 +1,9 @@
 const express = require("express")
-const router = express.Router()
-const User = require('../../models/user') 
 const winston = require('winston')
+const bcrypt = require('bcrypt')
+const router = express.Router()
+
+const User = require('../../models/user') 
 
 const { validarLogin } = require("../../middlewares/validator.js")
 
@@ -24,7 +26,9 @@ router.post("/login", validarLogin, async (req, res) => {
         const findUser = await User.findOne({ username })
 
         if (findUser) {
-            if (password == findUser.password) {
+            const compare = await bcrypt.compare(password, findUser.password)
+
+            if (compare) {
                 const token = jwt.sign({ username: findUser.username }, 'secret', {expiresIn: "1h"})
                 loginLog.info('Successful login try: ' + username)
 

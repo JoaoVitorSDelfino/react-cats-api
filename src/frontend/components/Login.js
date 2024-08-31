@@ -19,6 +19,7 @@ function Login() {
       navigate("/mainMenu")
       setErrorMessage("")
     } catch (e) {
+      console.log(e)
       setErrorMessage("Login ou senha incorretos.")
     }
   };

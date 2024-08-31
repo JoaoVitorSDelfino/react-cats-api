@@ -27,6 +27,7 @@ function SearchCat() {
             setError(0)
             setErrorMessage('')
         } catch (error) {
+            console.log(error)
             setError(1)
             setCatData(null)
             setErrorMessage(error.response.data.gato.mensagem)

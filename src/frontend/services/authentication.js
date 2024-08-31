@@ -10,9 +10,9 @@ export const signLogin = async (username, password) => {
         return response.data
       } catch (err) {
         if (err.response && err.response.status === 429) {
-          throw new Error('Muitas tentativas de login. Tente novamente mais tarde.');
+          throw new Error('ERRO, timed out devido a muitas tentantivas de login!');
         } else {
-          throw new Error('Erro ao fazer login, verifique novamente as credenciais fornecidas');
+          throw new Error('ERRO, credenciais inválidas!');
         }
     }
 }
