@@ -1,10 +1,10 @@
 const express = require("express")
 const router = express.Router()
 const winston = require('winston')
+const apicache = require('apicache')
 
 const Gato = require('../catControl')
 const authenticate = require('../../middlewares/authToken.js')
-
 const { validarGato } = require("../../middlewares/validator.js")
 
 const apiLog = winston.createLogger({
@@ -16,7 +16,11 @@ const apiLog = winston.createLogger({
     ],
 })
 
-router.get('/getCat/:nome', authenticate, async (req, res) => {
+// Inicialize o apicache
+let cache = apicache.middleware
+
+// Rota com cache
+router.get('/getCat/:nome', authenticate, cache('5 minutes'), async (req, res) => {
     try {
         const logMessage = `${req.method} ${req.originalUrl}`
         apiLog.info(logMessage)
@@ -25,16 +29,17 @@ router.get('/getCat/:nome', authenticate, async (req, res) => {
 
         // Valida se o gato foi encontrado
         if (gato.status) {
-            res.status(201).json({gato: gato})
+            res.status(201).json({ gato: gato })
         } else {
-            res.status(400).json({gato: gato})
+            res.status(400).json({ gato: gato })
         }
     } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'ERRO ao buscar o gato'})
+        res.status(500).json({ error: 'ERRO ao buscar o gato' })
     }
 })
 
+// Rota sem cache
 router.post("/addCat", authenticate, validarGato, async (req, res) => {
     try {
         const logMessage = `${req.method} ${req.originalUrl}`
@@ -50,7 +55,6 @@ router.post("/addCat", authenticate, validarGato, async (req, res) => {
     } catch (e) {
         res.status(500).send({ e })
     }
-
 })
 
 module.exports = router
