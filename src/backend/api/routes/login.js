@@ -3,6 +3,8 @@ const router = express.Router()
 const User = require('../../models/user') 
 const winston = require('winston')
 
+const { validarLogin } = require("../../middlewares/validator.js")
+
 const jwt = require('jsonwebtoken')
 
 const loginLog = winston.createLogger({
@@ -14,7 +16,7 @@ const loginLog = winston.createLogger({
     ],
 })
 
-router.post("/login", async (req, res) => {
+router.post("/login", validarLogin, async (req, res) => {
     const { username, password } = req.body
     loginLog.info('Login try: ' + username)
   

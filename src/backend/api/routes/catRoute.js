@@ -5,6 +5,8 @@ const winston = require('winston')
 const Gato = require('../catControl')
 const authenticate = require('../../middlewares/authToken.js')
 
+const { validarGato } = require("../../middlewares/validator.js")
+
 const apiLog = winston.createLogger({
     level: "info",
     format: winston.format.json(),
@@ -14,7 +16,7 @@ const apiLog = winston.createLogger({
     ],
 })
 
-router.get('/getCat/:nome', authenticate, async (req, res) => {
+router.get('/getCat/:nome', authenticate, validarGato, async (req, res) => {
     try {
         const logMessage = `${req.method} ${req.originalUrl}`
         apiLog.info(logMessage)
