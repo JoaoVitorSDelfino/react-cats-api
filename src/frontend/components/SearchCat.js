@@ -1,23 +1,33 @@
 import axios from "axios"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import {getToken} from "../services/authentication"
+import { getToken } from "../services/authentication"
 import Results from './Results'
 
 function SearchCat() {
     const [nome, setNome] = useState("")
     const [catData, setCatData] = useState(null)
     const [error, setError] = useState(null)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [isLoading, setIsLoading] = useState(true) // Novo estado para carregar o redirecionamento
     const navigate = useNavigate()
 
-    const [errorMessage, setErrorMessage] = useState("")
+    useEffect(() => {
+        const token = getToken()
+        if (!token) {
+            navigate("/") // Redireciona se não houver token
+        } else {
+            setIsLoading(false) // Desmarca o estado de carregamento se houver um token
+        }
+    }, [navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-    
+
         try {
             const token = getToken()
+            console.log(token)
 
             const response = await axios.get(`https://localhost:3001/getCat/${nome}`, {
                 headers: { 'Authorization': `${token}` }
@@ -30,15 +40,19 @@ function SearchCat() {
             console.log(error)
             setError(1)
             setCatData(null)
-            setErrorMessage(error.response.data.gato.mensagem)
+            setErrorMessage(error.response?.data?.gato?.mensagem || "Erro desconhecido")
         }
-    
+
         // Limpar os campos após o submit
         setNome("")
     }
 
     const redirect = () => {
         navigate('/mainMenu')
+    }
+
+    if (isLoading) {
+        return <div>Carregando...</div> // Mostra uma mensagem de carregamento enquanto o redirecionamento é processado
     }
 
     return (

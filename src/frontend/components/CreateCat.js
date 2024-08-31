@@ -1,5 +1,5 @@
 import axios from "axios"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import {getToken} from "../services/authentication"
@@ -10,7 +10,16 @@ function CreateCat() {
   const [description, setDescription] = useState("")
 
   const navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(true) // Novo estado para carregar o redirecionamento
+
+  useEffect(() => {
+    const token = getToken()
+    if (!token) {
+        navigate("/") // Redireciona se não houver token
+    } else {
+        setIsLoading(false) // Desmarca o estado de carregamento se houver um token
+    }
+}, [navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

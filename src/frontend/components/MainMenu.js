@@ -1,7 +1,21 @@
 import { useNavigate } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import {getToken} from "../services/authentication"
 
 function MainMenu() {
+    const [isLoading, setIsLoading] = useState(true) // Novo estado para carregar o redirecionamento
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+      const token = getToken()
+      if (!token) {
+          navigate("/") // Redireciona se não houver token
+      } else {
+          setIsLoading(false) // Desmarca o estado de carregamento se houver um token
+      }
+  }, [navigate])
+
 
     const redirect = (route) => {
         if (route === 0) {
