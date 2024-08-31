@@ -26,7 +26,8 @@ router.post("/login", validarLogin, async (req, res) => {
         const findUser = await User.findOne({ username })
 
         if (findUser) {
-            const compare = await bcrypt.compare(password, findUser.password)
+            loginPassword = String(findUser.password)
+            const compare = bcrypt.compare(password, loginPassword)
 
             if (compare) {
                 const token = jwt.sign({ username: findUser.username }, 'secret', {expiresIn: "1h"})

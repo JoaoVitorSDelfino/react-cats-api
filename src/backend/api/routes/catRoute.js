@@ -16,7 +16,7 @@ const apiLog = winston.createLogger({
     ],
 })
 
-router.get('/getCat/:nome', authenticate, validarGato, async (req, res) => {
+router.get('/getCat/:nome', authenticate, async (req, res) => {
     try {
         const logMessage = `${req.method} ${req.originalUrl}`
         apiLog.info(logMessage)
@@ -35,7 +35,7 @@ router.get('/getCat/:nome', authenticate, validarGato, async (req, res) => {
     }
 })
 
-router.post("/addCat", authenticate, async (req, res) => {
+router.post("/addCat", authenticate, validarGato, async (req, res) => {
     try {
         const logMessage = `${req.method} ${req.originalUrl}`
         apiLog.info(logMessage)
@@ -53,4 +53,4 @@ router.post("/addCat", authenticate, async (req, res) => {
 
 })
 
-module.exports = router;
+module.exports = router
