@@ -42,6 +42,10 @@ router.get('/getCat/:nome', authenticate, cache('5 minutes'), async (req, res) =
 // Rota sem cache
 router.post("/addCat", authenticate, validarGato, async (req, res) => {
     try {
+        req.body.image = (req.body.image).replace(/&#x2F;/g, '/')
+
+        console.log(req.body)
+
         const logMessage = `${req.method} ${req.originalUrl}`
         apiLog.info(logMessage)
 
